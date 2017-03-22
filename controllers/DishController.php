@@ -15,6 +15,7 @@ class DishController extends Controller
         $_message = "Выберите от 2 до 5 ингредиентов";
 
         if ($model->load(Yii::$app->request->post())) {
+            $_message = "";
             if(count($model->ingredients) >= 2)
                 $_dishes = $model->getDishesWithIngredientsIds();
             else
