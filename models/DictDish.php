@@ -59,6 +59,11 @@ class DictDish extends ActiveRecord
 
     public function getDictIngredientsIds()
     {
+        return RelDishIngredient::getDishIngredientIds($this->id);
+    }
+
+    public function getDictIngredient()
+    {
         return RelDishIngredient::getDishIngredient($this->id);
     }
 

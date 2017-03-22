@@ -71,11 +71,24 @@ class RelDishIngredient extends ActiveRecord
      * @param int $dish_id
      * @return int[]
      */
-    public static function getDishIngredient($dish_id) {
+    public static function getDishIngredientIds($dish_id) {
         return ArrayHelper::map(
-            self::find()->alias('s')->where(['dish_id' => $dish_id])
+            self::getDishIngredient($dish_id), 'id', 'id');
+    }
+
+    /**
+     * @param int $dish_id
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function getDishIngredient($dish_id) {
+        /*
+        return self::find()->alias('s')->where(['dish_id' => $dish_id])
                 ->join('JOIN', DictIngredient::tableName() . ' as di', 's.ingredient_id = di.id')
-                ->select('di.id')->all(), 'id', 'id');
+                ->select('di.*')->all();
+               */
+        return DictIngredient::find()->alias('s')
+            ->join('JOIN', self::tableName() . ' as di', 'di.ingredient_id = s.id and di.dish_id = ' . $dish_id)
+            ->all();
     }
 
     /**

@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -33,5 +34,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
         ],
     ]) ?>
+
+    <label class="control-label">Список ингредиентов</label>
+
+    <?= Html::ul(ArrayHelper::map($model->getDictIngredient(), 'id', 'name')); ?>
 
 </div>

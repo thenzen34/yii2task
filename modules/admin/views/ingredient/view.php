@@ -31,8 +31,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'name',
-            'visible',
+            [
+                'attribute' => 'visible',
+                'value' => function ($data) {
+                    if ($data->visible == 0) {
+                        return 'Нет';
+                    }
+                    return 'Да';
+                },
+                'filter' => ['0' => 'Нет', '1' => 'Да'],
+            ]
         ],
     ]) ?>
-
 </div>
