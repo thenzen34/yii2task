@@ -39,16 +39,14 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    $_items = [/*
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],*/
+    $_items = [
+        ['label' => 'Ингредиенты', 'url' => ['ingredient/index']],
         ['label' => 'Блюда', 'url' => ['dish/index']],
     ];
     if(Yii::$app->user->isGuest) {
         $_items[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
-        $_items[] = ['label' => 'Админка', 'url' => ['/admin']];
+        $_items[] = ['label' => 'Сайт', 'url' => ['/']];
         $_items[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
@@ -67,6 +65,7 @@ AppAsset::register($this);
 
     <div class="container">
         <?= Breadcrumbs::widget([
+            'homeLink' => false,
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= $content ?>
